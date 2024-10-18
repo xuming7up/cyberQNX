@@ -1,0 +1,10 @@
+prefix=/apollo/install.Linux.x86_64
+exec_prefix=${prefix}
+libdir=/apollo/install.Linux.x86_64/lib
+includedir=/apollo/install.Linux.x86_64/include
+
+Name: TinyXML2
+Description: simple, small, C++ XML parser
+Version: 4.0.1
+Libs: -L${libdir} -ltinyxml2
+Cflags: -I${includedir}

@@ -1,0 +1,35 @@
+syntax = "proto2";
+package apollo.drivers;
+
+import "common/header.proto";
+
+/*
+* @Desc: Change History
+* @Date: 2024-10-15
+* @Version: 1.0.0
+* @Feature List:
+* -1.Add shm support(put the points to another shared memory to avoid the memory copy).
+* -2.Add merged points clouds support(need work with feature 1).
+* 
+*/
+
+message PointXYZIT {
+  optional float x = 1 [default = nan];
+  optional float y = 2 [default = nan];
+  optional float z = 3 [default = nan];
+  optional uint32 intensity = 4 [default = 0];
+  optional uint64 timestamp = 5 [default = 0];
+}
+
+message PointCloud {
+  optional apollo.common.Header header = 1;
+  optional string frame_id = 2;
+  optional bool is_dense = 3;
+  repeated PointXYZIT point = 4;
+  optional double measurement_time = 5;
+  optional uint32 width = 6;
+  optional uint32 height = 7;
+  optional uint32 block_index = 8;
+  optional string shared_mem_name = 9;
+  repeated PointCloud merged_point_clouds = 10;
+}

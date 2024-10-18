@@ -1,0 +1,11 @@
+prefix=/apollo/install.Linux.aarch64
+exec_prefix=/apollo/install.Linux.aarch64
+libdir=/apollo/install.Linux.aarch64/lib
+includedir=/apollo/install.Linux.aarch64/include
+
+Name: Protocol Buffers
+Description: Google's Data Interchange Format
+Version: 3.12.3.0
+Libs: -L${libdir} -lprotobuf-lite -lpthread
+Cflags: -I${includedir} -lpthread
+Conflicts: protobuf

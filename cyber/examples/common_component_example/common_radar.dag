@@ -1,0 +1,16 @@
+# Define all coms in DAG streaming.
+    module_config {
+    module_library : "lib/libcommon_component_radar.so"
+    components {
+        class_name : "ComponentRadar"
+        config {
+            name : "common_component_radar"
+            readers {
+                channel: "/radar/prediction"
+            }
+            readers {
+                channel: "/radar/test"
+            }
+        }
+      }
+    }

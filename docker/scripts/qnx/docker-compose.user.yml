@@ -1,0 +1,22 @@
+version: '3.4'
+
+x-user_build_environment: &user_build_environment
+    build:
+      args:
+
+        USER_UID: 1000
+        USER_GID: 0
+
+    volumes:
+    - ~/.ssh:/home/jenkins/.ssh
+    - ~/.gitconfig:/home/jenkins/.gitconfig:ro
+    - ~/.qnx:/home/jenkins/.qnx
+    - ../../../:/apollo
+
+    environment:
+      PATH: "/usr/local/cuda-safe-11.4/bin/:${PATH}"
+
+services:
+  # use YAML anchors to forward the common config to each service
+  proai-nvidia-qnx-6.0-soc:
+    << : *user_build_environment

@@ -1,0 +1,14 @@
+prefix=/apollo/install.Linux.x86_64
+exec_prefix=${prefix}
+libdir=/apollo/install.Linux.x86_64/lib
+includedir=/apollo/install.Linux.x86_64/include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 58.91.100
+Requires: 
+Requires.private: libswresample >= 3.7.100, libavutil >= 56.51.100
+Conflicts:
+Libs: -L${libdir}  -lavcodec 
+Libs.private: -lvpx -lm -lvpx -lm -lvpx -lm -lvpx -lm -pthread -lm -llzma -lz -lfdk-aac -lmp3lame -lm -lopus -ltheoraenc -ltheoradec -logg -lvorbis -lvorbisenc -lx264 -lx265
+Cflags: -I${includedir}

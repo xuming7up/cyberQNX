@@ -1,0 +1,32 @@
+version: '3.4'
+
+x-common_build_environment: &common_build_environment
+
+  user: "jenkins"     # without that all files will be created with the root user
+  stdin_open: true    # docker run -i
+  tty: true           # docker run -t
+
+  working_dir: "/apollo"
+
+
+  network_mode: "host"
+
+  # Overrides default entrypoint so things don't shut down after the process ends.
+  entrypoint: ["/bin/sh", "-c", "while sleep 1000; do :; done" ]
+
+services:
+  # use YAML anchors to forward the common config to each service
+
+  proai-nvidia-qnx-6.0-soc:
+    build:
+      context: ../.                   
+      dockerfile: qnx/Dockerfile
+      network: host
+      args:
+        IMAGE: #Image_REPOSITORY:Image_TAG
+
+    << : *common_build_environment
+
+volumes:
+  vs_code_extension_volume:
+

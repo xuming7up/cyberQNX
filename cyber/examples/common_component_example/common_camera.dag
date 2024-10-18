@@ -1,0 +1,16 @@
+# Define all coms in DAG streaming.
+    module_config {
+    module_library : "lib/libcommon_component_camera.so"
+    components {
+        class_name : "ComponentCamera"
+        config {
+            name : "common_component_camera"
+            readers {
+                channel: "/camera/prediction"
+            }
+            readers {
+                channel: "/camera/test"
+            }
+        }
+      }
+    }
