@@ -205,11 +205,11 @@ cyber launch:
 
 ## Questions
 
-You are welcome to submit questions and bug reports as [GitHub Issues](https://github.com/ApolloAuto/apollo/issues "https://github.com/ApolloAuto/apollo/issues").
+You are welcome to submit questions and bug reports as [GitHub Issues](https://github.com/xuming7up/cyberQNX/issues "https://github.com/xuming7up/cyberQNX/issues").
 
 ## Copyright and License
 
-This release is provided under the [Apache-2.0 license](https://github.com/ApolloAuto/apollo/blob/master/LICENSE).
+This release is provided under the [Apache-2.0 license](https://github.com/xuming7up/cyberQNX/blob/main/LICENSE).
 
 ## Disclaimer
 
@@ -217,4 +217,4 @@ This release only has the source code for cyber，tools，examples and all third
 
 ## Connect with us
 
-Interested in our turnKey solutions or partnering with us Mail us at: [xxxpartner@google.com](mailto:xxxpartner@google.com "mailto:xxxpartner@google.com")
+Interested in our turnKey solutions or partnering with us Mail us at: [ming.xu4@zf.com](mailto:ming.xu4@zf.com "mailto:ming.xu4@zf.com")
