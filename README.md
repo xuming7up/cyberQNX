@@ -76,12 +76,10 @@ Docker image envirement
 
 * cd docker/scripts
 * ./dev_start.sh  
-  *Note*: If docker images download fails, you can try to modify the docker repository:  
-  vim docker/scripts/dev\_start.sh  
-  DOCKER_REPO="apolloauto/apollo"`->`DOCKER_REPO="registry.baidubce.com/apolloauto/apollo"`
+  *Note*: The default way to enable the GPU inside docker: "docker run --gpus all";in some platforms you need to use parameters: "docker run --runtime=nvidia".
 * ./dev_into.sh
 * ./scripts/cmake_build.sh linux
-* output files: ./install.Linux.x86_64/
+* output folder: install.Linux.x86_64/
 
 ### Run examples
 
@@ -116,12 +114,10 @@ Docker image envirement
 
 * cd docker/scripts
 * ./dev_start.sh  
-  *Note*: If docker images download fails, you can try to modify the docker repository:  
-  vim docker/scripts/dev\_start.sh  
-  DOCKER_REPO="apolloauto/apollo"`->`DOCKER_REPO="registry.baidubce.com/apolloauto/apollo"`
+  *Note*: The default way to enable the GPU inside docker: "docker run --gpus all";in some platforms you need to use parameters: "docker run --runtime=nvidia".
 * ./dev_into.sh
 * ./scripts/cmake_build.sh linux
-* output files: ./install.Linux.aarch64/
+* output folder: install.Linux.aarch64/
 
 ### Run examples
 
@@ -152,17 +148,17 @@ Docker image envirement
 * Docker image: (you must get the docker image from blackberry with QNX7.1 SDP)
 * cmake version 3.16.8 and above
 * protoc version 3.12.3
-* Modified the ./docker/scripts/qnx/docker-compose.yml line 32:  
+* Modified the ./docker/scripts/qnx/docker-compose.yml line 26:
   e.g. IMAGE: your_image_REPOSITORY:your_image_TAG
 * Make sure QNX license exist.
 
 ### Build step
 
 * cd docker/scripts/qnx
-* ./dev_start.sh -l
+* ./dev_start.sh
 * ./dev_into.sh
 * ./scripts/cmake_build.sh qnx
-* output files: ./install.QNX.aarch64/
+* output folder: install.QNX.aarch64/
 
 ### Run examples step
 
@@ -170,9 +166,11 @@ Environment:
 
 * Target system: ARM QNX aarch64
 * The terminfo files should be complete(for cyber_monitor):  
-  (host):/opt/qnx710/target/qnx7/usr/lib/terminfo -> (target):/usr/lib/terminfo
+  *Note*:If terminfo files are missing in the target system,you can try using the scp command to copy terminfo files from qnx docker container to the target system.
+  e.g.scp -r (host):<QNX_SDP_ROOT>/target/qnx7/usr/lib/terminfo -> (target):/usr/lib/terminfo
 * The python3.8 should be available(for cyber_launch):  
-  (host): /opt/qnx710/target/qnx7/usr/lib/python3.8/* -> (target): /usr/lib/
+  *Note*:If python is not available in the target system,you can try using the scp command to copy python files from qnx docker container to the target system.
+  e.g.scp -r (host): <QNX_SDP_ROOT>/target/qnx7/usr/lib/python3.8 -> (target): /usr/lib/python3.8
 * Deploy bin files to SoC:  
   e.g. scp -r ./install.QNX.aarch64/* USER@hostIP:/test
 * ssh to the SoC and source the rc file:  
@@ -184,24 +182,50 @@ Environment:
 
 ## Run example commands
 
+Linux log path: /apollo/data/log
+QNX log path: /data/log
+
 **cyber comm**:
 
 * cyber_example_talker
 * cyber_example_listener
 
+  The output of log(cyber_example_listener.INFO)：
+
+  ```
+  "... Received message seq-> 27"
+  "... msgcontent->Hello, apollo!"
+  ```
+
 **cyber service**:
 
 * cyber_example_service
 
-cyber mainboard:
+  The output of log(cyber_example_service.INFO)：
+  ```
+  "... i am driver server"
+  "... client recv response."
+  ```
+
+**cyber mainboard**:
 
 * mainboard -d share/examples/timer_component_example/timer.dag
 * cyber_monitor
 
-cyber launch:
+  The output of monitor:
+  ```
+  /carstatus/channel 100.00
+  ```
+
+**cyber launch**:
 
 * cyber_launch start share/examples/timer_component_example/timer.launch
 * cyber_monitor
+
+  The output of monitor:
+  ```
+  /carstatus/channel 100.00
+  ```
 
 ## Questions
 
